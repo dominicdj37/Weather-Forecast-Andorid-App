@@ -39,5 +39,18 @@
             android:id="@+id/StatusImageView" android:layout_below="@+id/textViewWeather"
             android:scaleType="fitXY" android:layout_marginTop="10dp" android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp" android:layout_marginBottom="10dp"/>
+    <WebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/webView1"
+            android:layout_below="@+id/StatusImageView">
+    </WebView>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_below="@+id/StatusImageView">
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar1" android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
 </RelativeLayout>
