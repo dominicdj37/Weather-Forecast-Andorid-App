@@ -41,7 +41,6 @@ class HomeActivity : AppCompatActivity() {
         }
 
         myViewModel.responseLiveData.observe(this, Observer {
-            textViewWeather.text = it.toString()
             if (it != null) {
                 updateDetails(it)
             }
@@ -52,7 +51,19 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun updateDetails(it: ResponseData) {
+        textViewWeather.text = it.toString()
         updateImage(it.current.condition.icon)
+        tvCityName.text = it.location.name
+        tvLocation.text = "${it.location.region}, ${it.location.country}."
+        tvTemp.text =  it.current.tempC.toString()
+        tvFeelsLike.text = "Feels like ${it.current.feelslikeC.toString()} degree celsius"
+        tvHumidity.text = it.current.humidity.toString()
+        tvWindSpeed.text = "${it.current.windKph.toString()} Kmph"
+        tvWindHeading.text = it.current.windDir
+        tvwindDegrees.text = it.current.windDegree.toString()
+        tvStatus.text = it.current.condition.text
+
+
     }
 
     @SuppressLint("CheckResult")
