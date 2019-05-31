@@ -18,6 +18,7 @@ import com.example.fcast.R
 import com.example.fcast.data.Responce.ResponseData
 import com.example.fcast.data.WeatherApiService
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
 
 
 class HomeActivity : AppCompatActivity() {
@@ -47,6 +48,12 @@ class HomeActivity : AppCompatActivity() {
         })
         myViewModel.errorMessage.observe(this, Observer {
             Toast.makeText(this,it.toString(),Toast.LENGTH_SHORT).show()
+
+        })
+
+
+        myViewModel.timevariable.observe(this, Observer {
+            timetextView.text = it.toString()
         })
     }
 
@@ -67,20 +74,36 @@ class HomeActivity : AppCompatActivity() {
     }
 
     @SuppressLint("CheckResult")
-    private fun updateImage(icon: String) {
-        GlideApp.with(this).asBitmap()
-            .load(Uri.parse("http:$icon")).fitCenter()
-            .listener(object: RequestListener<Bitmap>{
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
-                    myViewModel.errorMessage.postValue("image could not be loaded ${e?.message.toString()}")
-                    return false
-                }
-                override fun onResourceReady(resource: Bitmap?, model: Any?, target: Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+     private fun updateImage(icon: String) {
 
-                    return false
-                }
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000)
+            GlideApp.with(this@HomeActivity).asBitmap()
+                .load(Uri.parse("http:$icon")).fitCenter()
+                .listener(object : RequestListener<Bitmap> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Bitmap>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        myViewModel.errorMessage.postValue("image could not be loaded ${e?.message.toString()}")
+                        return false
+                    }
 
-            }).into(StatusImageView)
+                    override fun onResourceReady(
+                        resource: Bitmap?,
+                        model: Any?,
+                        target: Target<Bitmap>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+
+                        return false
+                    }
+
+                }).into(StatusImageView)
+        }
     }
 
 

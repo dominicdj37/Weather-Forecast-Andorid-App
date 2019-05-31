@@ -54,14 +54,13 @@
 
     <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/textViewWeather"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="@+id/StatusImageView"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/tvFeelsLike"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/cityInput"
             app:autoSizeTextType="uniform" app:autoSizeMinTextSize="12sp" app:autoSizeMaxTextSize="14sp"/>
     <ImageView
             android:layout_width="0dp"
@@ -189,5 +188,13 @@
             app:layout_constraintStart_toStartOf="@+id/tvHumidity" app:layout_constraintEnd_toEndOf="@+id/tvHumidity"
             android:textColor="@color/colorPrimaryDark" app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@+id/tvHumidity" android:gravity="center"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timetextView" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/cityInput"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textViewWeather"
+            android:textSize="30sp"/>
 
 </android.support.constraint.ConstraintLayout>
